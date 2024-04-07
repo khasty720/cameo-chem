@@ -2,13 +2,12 @@ import {defer} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
 import {SearchForm, SearchResults, NoSearchResults} from '~/components/Search';
-import config from '~/config';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: `${config.appName} | Search`}];
+  return [{title: 'Search'}];
 };
 
 /**

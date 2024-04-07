@@ -3,6 +3,17 @@ import {json} from '@shopify/remix-oxygen';
 import {Pagination, getPaginationVariables, Image} from '@shopify/hydrogen';
 
 /**
+ * @type {MetaFunction}
+ */
+export const meta = () => {
+  return [
+    {
+      title: `Collections`,
+    },
+  ];
+};
+
+/**
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context, request}) {
