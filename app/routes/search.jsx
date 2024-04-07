@@ -1,14 +1,14 @@
 import {defer} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
-
 import {SearchForm, SearchResults, NoSearchResults} from '~/components/Search';
+import config from '~/config';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: `Hydrogen | Search`}];
+  return [{title: `${config.appName} | Search`}];
 };
 
 /**
@@ -61,6 +61,7 @@ export default function SearchPage() {
     <div className="search">
       <h1>Search</h1>
       <SearchForm searchTerm={searchTerm} />
+
       {!searchTerm || !searchResults.totalResults ? (
         <NoSearchResults />
       ) : (

@@ -2,12 +2,18 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
+import config from '~/config';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [
+    {
+      title: `${config?.appName} | Home`,
+      description: config?.description,
+    },
+  ];
 };
 
 /**
@@ -27,6 +33,22 @@ export default function Homepage() {
   const data = useLoaderData();
   return (
     <div className="home">
+      <p>
+        We are an industrial chemical company that focuses on the Car Wash,
+        Truck Wash, Ready Mix Concrete, Asphalt, Floor Care, Odor Control and
+        Manufacturing Industries.
+      </p>
+      <p>
+        What separates Cameo Chemicals from the competition is that we focus on
+        custom blending products to meet the specific needs of our customers,
+        and we are able to supply these products in small quantities if
+        necessary.
+      </p>
+      <p>
+        We also offer a wide selection of standard products for all of these
+        industries through our online store.
+      </p>
+
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
