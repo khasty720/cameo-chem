@@ -2,16 +2,15 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import config from '~/config';
 
 /**
  * @type {MetaFunction}
  */
-export const meta = () => {
+export const meta = ({data}) => {
   return [
     {
-      title: `${config?.appName} | Home`,
-      description: config?.description,
+      title: data?.shop?.name ?? 'Cameo Chemicals',
+      description: data?.shop?.description ?? '',
     },
   ];
 };
@@ -24,8 +23,9 @@ export async function loader({context}) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
+  const shop = await storefront.query(SHOP_QUERY);
 
-  return defer({featuredCollection, recommendedProducts});
+  return defer({featuredCollection, recommendedProducts, shop});
 }
 
 export default function Homepage() {
@@ -48,7 +48,6 @@ export default function Homepage() {
         We also offer a wide selection of standard products for all of these
         industries through our online store.
       </p>
-
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
@@ -116,6 +115,15 @@ function RecommendedProducts({products}) {
     </div>
   );
 }
+
+const SHOP_QUERY = `#graphql
+  query Shop {
+    shop {
+      name
+      description
+    }
+  }
+`;
 
 const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
