@@ -1,6 +1,7 @@
 import {Await, NavLink} from '@remix-run/react';
 import {Suspense} from 'react';
 import {useRootLoaderData} from '~/root';
+import {Icon} from './common/Icon';
 
 /**
  * @param {HeaderProps}
@@ -94,7 +95,7 @@ function HeaderCtas({isLoggedIn, cart}) {
 function HeaderMenuMobileToggle() {
   return (
     <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
-      ☰
+      <Icon icon="menu" />
     </a>
   );
 }

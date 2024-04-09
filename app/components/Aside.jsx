@@ -1,3 +1,5 @@
+import {Icon} from '~/components/common/Icon';
+
 /**
  * A side bar component with Overlay that works without JavaScript.
  * @example
@@ -38,7 +40,7 @@ function CloseAside() {
   return (
     /* eslint-disable-next-line jsx-a11y/anchor-is-valid */
     <a className="close" href="#" onChange={() => history.go(-1)}>
-      &times;
+      <Icon icon="x" />
     </a>
   );
 }
