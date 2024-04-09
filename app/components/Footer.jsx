@@ -22,10 +22,11 @@ export function Footer({menu, shop}) {
  */
 function FooterMenu({menu, primaryDomainUrl}) {
   const {publicStoreDomain} = useRootLoaderData();
+  const menuItems = menu?.items || FALLBACK_FOOTER_MENU.items;
 
   return (
     <nav className="footer-menu" role="navigation">
-      {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+      {menuItems.map((item) => {
         if (!item.url) return null;
         // if the url is internal, we strip the domain
         const url =
