@@ -1,5 +1,6 @@
 import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
+import {NextUIProvider, Input} from '@nextui-org/react';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
@@ -8,7 +9,6 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
-import {NextUIProvider} from '@nextui-org/react';
 
 /**
  * @param {LayoutProps}
@@ -59,25 +59,21 @@ function SearchAside() {
         <br />
         <PredictiveSearchForm>
           {({fetchResults, inputRef}) => (
-            <div>
-              <input
+            <div className="flex w-full flex-wrap md:flex-nowrap gap-2 items-center">
+              <Input
                 name="q"
+                onClear={() => {
+                  fetchResults({target: {value: ''}});
+                  inputRef.current.value = '';
+                }}
                 onChange={fetchResults}
-                onFocus={fetchResults}
-                placeholder="Search"
+                label="Search"
+                placeholder="Start typing to search ..."
                 ref={inputRef}
                 type="search"
+                size="md"
+                autocomplete="off"
               />
-              &nbsp;
-              <button
-                onClick={() => {
-                  window.location.href = inputRef?.current?.value
-                    ? `/search?q=${inputRef.current.value}`
-                    : `/search`;
-                }}
-              >
-                Search
-              </button>
             </div>
           )}
         </PredictiveSearchForm>

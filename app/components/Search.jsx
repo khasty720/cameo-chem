@@ -1,6 +1,7 @@
 import {Link, Form, useParams, useFetcher} from '@remix-run/react';
 import {Image, Money, Pagination} from '@shopify/hydrogen';
 import React, {useRef, useEffect} from 'react';
+import {Button, Input} from '@nextui-org/react';
 import {applyTrackingParams} from '~/lib/search';
 
 export const NO_PREDICTIVE_SEARCH_RESULTS = [
@@ -16,6 +17,13 @@ export const NO_PREDICTIVE_SEARCH_RESULTS = [
  */
 export function SearchForm({searchTerm}) {
   const inputRef = useRef(null);
+  const formRef = useRef(null);
+
+  const handleSubmit = () => {
+    if (formRef.current) {
+      formRef.current.submit();
+    }
+  };
 
   // focus the input when cmd+k is pressed
   useEffect(() => {
@@ -38,16 +46,24 @@ export function SearchForm({searchTerm}) {
   }, []);
 
   return (
-    <Form method="get">
-      <input
-        defaultValue={searchTerm}
-        name="q"
-        placeholder="Search…"
-        ref={inputRef}
-        type="search"
-      />
-      &nbsp;
-      <button type="submit">Search</button>
+    <Form method="get" ref={formRef}>
+      <div className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
+        <Input
+          label="Search"
+          defaultValue={searchTerm}
+          name="q"
+          ref={inputRef}
+          type="search"
+          size="sm"
+          onClear={() => {
+            inputRef.current.value = '';
+            handleSubmit();
+          }}
+        />
+        <Button type="submit" color="primary">
+          Search
+        </Button>
+      </div>
     </Form>
   );
 }
