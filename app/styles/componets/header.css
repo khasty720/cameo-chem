@@ -51,3 +51,7 @@
   grid-gap: 1rem;
   margin-left: auto;
 }
+
+.header-logo {
+  text-decoration: none !important;
+}

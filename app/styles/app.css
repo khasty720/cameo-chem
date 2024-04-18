@@ -5,6 +5,7 @@
 @import './componets/header.css';
 @import './componets/search.css';
 @import './componets/overlay.css';
+@import './componets/logo.css';
 
 /* Routes */
 @import './routes/account.css';
