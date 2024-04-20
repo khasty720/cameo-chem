@@ -1,9 +1,9 @@
-import {Await} from '@remix-run/react';
+import {Await, useNavigate} from '@remix-run/react';
 import {Suspense} from 'react';
 import {NextUIProvider, Input} from '@nextui-org/react';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
-import {Header, HeaderMenu} from '~/components/Header';
+import {Navbar} from '~/components/Navbar';
 import {CartMain} from '~/components/Cart';
 import {
   PredictiveSearchForm,
@@ -14,16 +14,14 @@ import {
  * @param {LayoutProps}
  */
 export function Layout({cart, children = null, footer, header, isLoggedIn}) {
+  const navigate = useNavigate();
   return (
     <>
-      <NextUIProvider>
+      <NextUIProvider navigate={navigate}>
         <CartAside cart={cart} />
         <SearchAside />
-        <MobileMenuAside menu={header?.menu} shop={header?.shop} />
 
-        {header && (
-          <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
-        )}
+        <Navbar header={header} isLoggedIn={isLoggedIn} />
         <main className="min-h-screen">{children}</main>
         <Suspense>
           <Await resolve={footer}>
@@ -80,27 +78,6 @@ function SearchAside() {
         <PredictiveSearchResults />
       </div>
     </Aside>
-  );
-}
-
-/**
- * @param {{
- *   menu: HeaderQuery['menu'];
- *   shop: HeaderQuery['shop'];
- * }}
- */
-function MobileMenuAside({menu, shop}) {
-  return (
-    menu &&
-    shop?.primaryDomain?.url && (
-      <Aside id="mobile-menu-aside" heading="MENU">
-        <HeaderMenu
-          menu={menu}
-          viewport="mobile"
-          primaryDomainUrl={shop.primaryDomain.url}
-        />
-      </Aside>
-    )
   );
 }
 
