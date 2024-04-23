@@ -34,7 +34,7 @@ function FooterLinks({menu, primaryDomainUrl}) {
           <li>
             <Link
               className="hover:text-accent block pb-2 text-sm"
-              href="/catalog"
+              href="/collections"
               scroll={false}
             >
               Catalog
