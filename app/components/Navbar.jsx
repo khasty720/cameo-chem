@@ -47,7 +47,7 @@ export function Navbar({header, isLoggedIn}) {
 
         <Link href="/" className="header-logo">
           <NavbarBrand>
-            <ProductLogo name={shop.name} size={28} />
+            <ProductLogo name={shop.name} size={40} />
           </NavbarBrand>
         </Link>
       </NavbarContent>
