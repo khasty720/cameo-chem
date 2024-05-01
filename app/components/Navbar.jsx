@@ -79,7 +79,14 @@ export function Navbar({header, cart, isLoggedIn}) {
           <Link href="/account">
             <Suspense fallback="Sign in">
               <Await resolve={isLoggedIn} errorElement="Sign in">
-                {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
+                {(isLoggedIn) => (
+                  <>
+                    <Icon icon={isLoggedIn ? 'user' : 'user-plus'} size={24} />
+                    <span className="sr-only">
+                      {isLoggedIn ? 'Account' : 'Sign in'}
+                    </span>
+                  </>
+                )}
               </Await>
             </Suspense>
           </Link>
