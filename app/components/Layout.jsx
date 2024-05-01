@@ -1,6 +1,7 @@
 import {Await, useNavigate} from '@remix-run/react';
 import {Suspense} from 'react';
-import {NextUIProvider, Input} from '@nextui-org/react';
+import {Input} from '@nextui-org/react';
+import {Providers} from '~/components/common/Providers';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Navbar} from '~/components/Navbar';
@@ -17,7 +18,7 @@ export function Layout({cart, children = null, footer, header, isLoggedIn}) {
   const navigate = useNavigate();
   return (
     <>
-      <NextUIProvider navigate={navigate}>
+      <Providers navigate={navigate}>
         <CartAside cart={cart} />
         <SearchAside />
 
@@ -28,7 +29,7 @@ export function Layout({cart, children = null, footer, header, isLoggedIn}) {
             {(footer) => <Footer menu={footer?.menu} shop={header?.shop} />}
           </Await>
         </Suspense>
-      </NextUIProvider>
+      </Providers>
     </>
   );
 }

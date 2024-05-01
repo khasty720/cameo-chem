@@ -38,6 +38,8 @@ export function Navbar({header, isLoggedIn}) {
       maxWidth="full"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
+      isBlurred
+      height="5rem"
     >
       <NavbarContent>
         <NavbarMenuToggle
@@ -45,7 +47,7 @@ export function Navbar({header, isLoggedIn}) {
           className="sm:hidden"
         />
 
-        <Link href="/" className="header-logo">
+        <Link href="/" className="hover:opacity-100">
           <NavbarBrand>
             <ProductLogo name={shop.name} size={40} />
           </NavbarBrand>
@@ -57,7 +59,7 @@ export function Navbar({header, isLoggedIn}) {
 
           return (
             <NavbarItem key={item.id} isActive={url === pathname}>
-              <Link href={url} color="foreground">
+              <Link href={url} color="primary">
                 {item.title}
               </Link>
             </NavbarItem>

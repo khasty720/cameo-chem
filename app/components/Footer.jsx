@@ -3,7 +3,7 @@ import {useRootLoaderData} from '~/root';
 
 export function Footer({menu, shop}) {
   return (
-    <footer className="relative bg-brand-alt pt-10 lg:pt-24 pb-6">
+    <footer className="relative bg-primary pt-10 lg:pt-24 pb-6">
       <div className="flex flex-col mx-auto max-w-6xl justify-center">
         <div className="grid gap-4 grid-cols-2">
           <div className="col-span-2 md:col-span-1">
@@ -33,7 +33,8 @@ function FooterLinks({menu, primaryDomainUrl}) {
         <ul className="list-unstyled">
           <li>
             <Link
-              className="hover:text-accent block pb-2 text-sm"
+              color="secondary"
+              className="block pb-2 text-sm"
               href="/collections"
               scroll={false}
             >
@@ -42,7 +43,8 @@ function FooterLinks({menu, primaryDomainUrl}) {
           </li>
           <li>
             <Link
-              className="hover:text-accent block pb-2 text-sm"
+              color="secondary"
+              className="block pb-2 text-sm"
               href="/pages/about"
               scroll={false}
             >
@@ -51,7 +53,8 @@ function FooterLinks({menu, primaryDomainUrl}) {
           </li>
           <li>
             <Link
-              className="hover:text-accent block pb-2 text-sm"
+              color="secondary"
+              className="block pb-2 text-sm"
               href="/pages/contact"
               scroll={false}
             >
@@ -78,7 +81,8 @@ function FooterLinks({menu, primaryDomainUrl}) {
             return (
               <li key={item.id}>
                 <Link
-                  className="hover:text-accent block pb-2 text-sm"
+                  color="secondary"
+                  className="block pb-2 text-sm"
                   href={url}
                   scroll={false}
                 >
@@ -102,30 +106,30 @@ function FooterFinisher() {
         </div>
       </div>
       <div className="items-center justify-center">
-        <a
-          className="mx-3.5 text-sm font-medium text-accent hover:text-accent-300 transition ease-in-out delay-150 duration-300"
-          href="https://www.linkedin.com/in/kyle-hasty-431a8848"
-          target="_blank"
-          rel="noreferrer"
+        <Link
+          color="secondary"
+          className="mx-3.5 text-sm font-medium transition ease-in-out delay-150 duration-300"
+          href="https://www.linkedin.com/in/cameochem"
+          isExternal
         >
           <i className="fa-brands fa-linkedin fa-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"></i>
-        </a>
-        <a
-          className="mx-3.5 text-sm font-medium text-accent hover:text-accent-300 transition ease-in-out delay-150 duration-300"
-          href="https://twitter.com/khasty1319"
-          target="_blank"
-          rel="noreferrer"
+        </Link>
+        <Link
+          color="secondary"
+          className="mx-3.5 text-sm font-medium transition ease-in-out delay-150 duration-300"
+          href="https://twitter.com/cameochem"
+          isExternal
         >
-          <i className="fab fa-twitter fa-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"></i>
-        </a>
-        <a
-          className="mx-3.5 text-sm font-medium text-accent hover:text-accent-300 transition ease-in-out delay-150 duration-300"
-          href="mailto:me@kylehasty.com"
-          target="_blank"
-          rel="noreferrer"
+          <i className="fab fa-x-twitter fa-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"></i>
+        </Link>
+        <Link
+          color="secondary"
+          className="mx-3.5 text-sm font-medium transition ease-in-out delay-150 duration-300"
+          href="mailto:contact@cameochem.com"
+          isExternal
         >
           <i className="fa-solid fa-envelope fa-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"></i>
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 <svg width="175" height="175" viewBox="0 0 175 175" fill="none" xmlns="http://www.w3.org/2000/svg">
   <style>
     .stroke {
-      stroke: #000;
+      stroke: #1d1742;
     }
 
     .fill {
-      fill: #000;
+      fill: #1d1742;
     }
 
     @media (prefers-color-scheme: dark) {
