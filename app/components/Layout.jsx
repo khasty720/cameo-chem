@@ -22,7 +22,7 @@ export function Layout({cart, children = null, footer, header, isLoggedIn}) {
         <CartAside cart={cart} />
         <SearchAside />
 
-        <Navbar header={header} isLoggedIn={isLoggedIn} />
+        <Navbar header={header} cart={cart} isLoggedIn={isLoggedIn} />
         <main className="min-h-screen">{children}</main>
         <Suspense>
           <Await resolve={footer}>

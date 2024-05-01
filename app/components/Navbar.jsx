@@ -8,12 +8,14 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   Link,
+  Badge,
 } from '@nextui-org/react';
 import {useLocation, Await} from '@remix-run/react';
 import {ProductLogo} from '~/components/common/ProductLogo';
+import {Icon} from '~/components/common/Icon';
 import {useRootLoaderData} from '~/root';
 
-export function Navbar({header, isLoggedIn}) {
+export function Navbar({header, cart, isLoggedIn}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {publicStoreDomain} = useRootLoaderData();
   const {pathname} = useLocation();
@@ -70,8 +72,8 @@ export function Navbar({header, isLoggedIn}) {
         <NavbarItem>
           <SearchToggle />
         </NavbarItem>
-        <NavbarItem>
-          <CartToggle cart={header.cart} />
+        <NavbarItem className="mt-1">
+          <CartToggle cart={cart} />
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
           <Link href="/account">
@@ -110,11 +112,32 @@ export function Navbar({header, isLoggedIn}) {
 }
 
 function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
+  return (
+    <a href="#search-aside">
+      <Icon icon="search" size={24} className="stroke-current text-primary" />
+    </a>
+  );
 }
 
 function CartBadge({count}) {
-  return <a href="#cart-aside">Cart {count}</a>;
+  return (
+    <a href="#cart-aside">
+      <Badge
+        content={count}
+        size="sm"
+        color="primary"
+        shape="circle"
+        showOutline={false}
+        isInvisible={count === 0}
+      >
+        <Icon
+          icon="shopping-bag"
+          size={24}
+          className="stroke-current text-primary"
+        />
+      </Badge>
+    </a>
+  );
 }
 
 function CartToggle({cart}) {
