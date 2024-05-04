@@ -32,24 +32,32 @@ export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
-    <div className="home">
-      <p>
-        We are an industrial chemical company that focuses on the Car Wash,
-        Truck Wash, Ready Mix Concrete, Asphalt, Floor Care, Odor Control and
-        Manufacturing Industries.
-      </p>
-      <p>
-        What separates Cameo Chemicals from the competition is that we focus on
-        custom blending products to meet the specific needs of our customers,
-        and we are able to supply these products in small quantities if
-        necessary.
-      </p>
-      <p>
-        We also offer a wide selection of standard products for all of these
-        industries through our online store.
-      </p>
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
+    <div>
+      <div className="hero text-center bg-gray-200 p-4 rounded-lg">
+        <p className="mb-2">
+          We are an industrial chemical company that focuses on the Car Wash,
+          Truck Wash, Ready Mix Concrete, Asphalt, Floor Care, Odor Control and
+          Manufacturing Industries.
+        </p>
+        <p className="mb-2">
+          What separates Cameo Chemicals from the competition is that we focus
+          on custom blending products to meet the specific needs of our
+          customers, and we are able to supply these products in small
+          quantities if necessary.
+        </p>
+        <p className="mb-2">
+          We also offer a wide selection of standard products for all of these
+          industries through our online store.
+        </p>
+      </div>
+      <FeaturedCollection
+        collection={data.featuredCollection}
+        className="mt-4"
+      />
+      <RecommendedProducts
+        products={data.recommendedProducts}
+        className="mt-4"
+      />
     </div>
   );
 }

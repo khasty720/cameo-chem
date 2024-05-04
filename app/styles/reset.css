@@ -11,10 +11,6 @@ body {
   min-height: 100vh;
 }
 
-main {
-  margin: 0 1rem 1rem 1rem;
-}
-
 section {
   padding: 1rem 0;
   @media (min-width: 768px) {
@@ -27,16 +23,5 @@ fieldset {
   flex-direction: column;
   margin-bottom: 0.5rem;
   padding: 1rem;
-}
-
-pre {
-  white-space: pre-wrap;
-}
-
-code {
-  background: #ddd;
-  border-radius: 4px;
-  font-family: monospace;
-  padding: 0.25rem;
 }
 

@@ -9,8 +9,10 @@ import {
   NavbarMenuItem,
   Link,
   Badge,
+  Avatar,
+  Button,
 } from '@nextui-org/react';
-import {useLocation, Await} from '@remix-run/react';
+import {useLocation, useLoaderData, Await} from '@remix-run/react';
 import {ProductLogo} from '~/components/common/ProductLogo';
 import {Icon} from '~/components/common/Icon';
 import {useRootLoaderData} from '~/root';
@@ -18,6 +20,7 @@ import {useRootLoaderData} from '~/root';
 export function Navbar({header, cart, isLoggedIn}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {publicStoreDomain} = useRootLoaderData();
+  const {customer} = useLoaderData();
   const {pathname} = useLocation();
   const {shop, menu} = header;
   const menuItems = menu?.items ?? [];
@@ -61,7 +64,7 @@ export function Navbar({header, cart, isLoggedIn}) {
 
           return (
             <NavbarItem key={item.id} isActive={url === pathname}>
-              <Link href={url} color="primary">
+              <Link href={url} color="primary" size="lg">
                 {item.title}
               </Link>
             </NavbarItem>
@@ -81,10 +84,25 @@ export function Navbar({header, cart, isLoggedIn}) {
               <Await resolve={isLoggedIn} errorElement="Sign in">
                 {(isLoggedIn) => (
                   <>
-                    <Icon icon={isLoggedIn ? 'user' : 'user-plus'} size={24} />
-                    <span className="sr-only">
-                      {isLoggedIn ? 'Account' : 'Sign in'}
-                    </span>
+                    {isLoggedIn && (
+                      <Avatar
+                        size="sm"
+                        showFallback
+                        name={customer?.firstName}
+                        src="https://images.unsplash.com/broken"
+                      />
+                    )}
+                    {!isLoggedIn && (
+                      <Button
+                        href="/account/login"
+                        as={Link}
+                        color="primary"
+                        variant="solid"
+                        size="sm"
+                      >
+                        Sign In
+                      </Button>
+                    )}
                   </>
                 )}
               </Await>
