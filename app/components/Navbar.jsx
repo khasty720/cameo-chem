@@ -51,7 +51,7 @@ export function Navbar({header, cart, isLoggedIn}) {
 
         <Link href="/" className="hover:opacity-100">
           <NavbarBrand>
-            <ProductLogo name={shop.name} size={40} />
+            <ProductLogo name={shop.name} />
           </NavbarBrand>
         </Link>
       </NavbarContent>

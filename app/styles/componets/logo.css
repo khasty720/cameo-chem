@@ -1,6 +1,13 @@
-.product-logo {
+.product-logo svg {
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .product-logo svg {
+    height: 2rem;
+  }
 }

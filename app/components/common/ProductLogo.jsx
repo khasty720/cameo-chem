@@ -1,10 +1,9 @@
 import React from 'react';
 
-export function ProductLogo({size = 28}) {
+export function ProductLogo() {
   return (
     <div className="product-logo">
       <svg
-        height={size}
         viewBox="0 0 1350 175"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
