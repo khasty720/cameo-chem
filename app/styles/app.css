@@ -6,6 +6,7 @@
 @import './componets/search.css';
 @import './componets/overlay.css';
 @import './componets/logo.css';
+@import './componets/hero.css';
 
 /* Routes */
 @import './routes/account.css';

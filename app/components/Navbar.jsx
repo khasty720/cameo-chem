@@ -20,9 +20,10 @@ import {useRootLoaderData} from '~/root';
 export function Navbar({header, cart, isLoggedIn}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {publicStoreDomain} = useRootLoaderData();
-  const {customer} = useLoaderData();
+  const loaderData = useLoaderData();
   const {pathname} = useLocation();
   const {shop, menu} = header;
+  const customer = loaderData?.customer ?? {};
   const menuItems = menu?.items ?? [];
 
   const getRelativeUrl = (item) => {

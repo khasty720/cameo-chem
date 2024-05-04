@@ -1,0 +1,16 @@
+.hero {
+  height: 35rem;
+  background: linear-gradient(252deg,#40b99e 3.98%,#173a69 80.84%);
+  color: #fff;
+  text-align: left;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.15rem;
+  font-weight: 700;
+  line-height: 1.1em;
+}

@@ -1,7 +1,8 @@
 import {defer} from '@shopify/remix-oxygen';
-import {Await, useLoaderData, Link} from '@remix-run/react';
+import {Await, useLoaderData} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
+import {Button, Link} from '@nextui-org/react';
 
 /**
  * @type {MetaFunction}
@@ -33,22 +34,39 @@ export default function Homepage() {
   const data = useLoaderData();
   return (
     <div>
-      <div className="hero text-center bg-gray-200 p-4 rounded-lg">
-        <p className="mb-2">
-          We are an industrial chemical company that focuses on the Car Wash,
-          Truck Wash, Ready Mix Concrete, Asphalt, Floor Care, Odor Control and
-          Manufacturing Industries.
-        </p>
-        <p className="mb-2">
-          What separates Cameo Chemicals from the competition is that we focus
-          on custom blending products to meet the specific needs of our
-          customers, and we are able to supply these products in small
-          quantities if necessary.
-        </p>
-        <p className="mb-2">
-          We also offer a wide selection of standard products for all of these
-          industries through our online store.
-        </p>
+      <div className="hero">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="col-span-1 col-start-1 mx-auto md:mx-10">
+            <h1 className="text-4xl font-bold mb-4">
+              Tailored Solutions Redefining Industries
+            </h1>
+            <p className="mb-4">
+              We are an industrial chemical company that focuses on the Car
+              Wash, Truck Wash, Ready Mix Concrete, Asphalt, Floor Care, Odor
+              Control and Manufacturing Industries.
+            </p>
+            <p className="mb-4">
+              What separates Cameo Chemicals from the competition is that we
+              focus on custom blending products to meet the specific needs of
+              our customers, and we are able to supply these products in small
+              quantities if necessary.
+            </p>
+            <p className="mb-4">
+              We also offer a wide selection of standard products for all of
+              these industries through our online store.
+            </p>
+            <Button
+              href="/collections"
+              as={Link}
+              size="large"
+              radius="sm"
+              variant="solid"
+              className="bg-white text-primary font-bold"
+            >
+              Shop Now
+            </Button>
+          </div>
+        </div>
       </div>
       <FeaturedCollection
         collection={data.featuredCollection}

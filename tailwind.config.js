@@ -11,20 +11,10 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#1d1742',
+          DEFAULT: '#173a69',
         },
         secondary: {
-          DEFAULT: '#0ea5e9',
-          50: '#b4e5fa',
-          100: '#a1def9',
-          200: '#7ad0f7',
-          300: '#54c3f5',
-          400: '#2db5f2',
-          500: '#0ea5e9',
-          600: '#0b80b4',
-          700: '#085a7f',
-          800: '#04354a',
-          900: '#010f15',
+          DEFAULT: '#40b99e',
         },
       },
     },
@@ -37,11 +27,11 @@ export default {
           colors: {
             primary: {
               foreground: '#ffffff',
-              DEFAULT: '#1d1742',
+              DEFAULT: '#173a69',
             },
             secondary: {
               foreground: '#ffffff',
-              DEFAULT: '#0ea5e9',
+              DEFAULT: '#40b99e',
             },
           },
         },
