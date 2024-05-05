@@ -46,14 +46,12 @@ export default function Homepage() {
               Control and Manufacturing Industries.
             </p>
             <p className="mb-4">
-              What separates Cameo Chemicals from the competition is that we
-              focus on custom blending products to meet the specific needs of
-              our customers, and we are able to supply these products in small
-              quantities if necessary.
+              Cameo Chemicals focuses on custom blending products to meet the
+              specific needs of our customers, and we are able to supply these
+              products in a variety of quantities and sizes.
             </p>
             <p className="mb-4">
-              We also offer a wide selection of standard products for all of
-              these industries through our online store.
+              We also offer a wide selection of standard products.
             </p>
             <Button
               href="/collections"

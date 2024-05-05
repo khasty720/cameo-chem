@@ -1,5 +1,5 @@
 .hero {
-  height: 35rem;
+  min-height: 35rem;
   background: linear-gradient(252deg,#40b99e 3.98%,#173a69 80.84%);
   color: #fff;
   text-align: left;
