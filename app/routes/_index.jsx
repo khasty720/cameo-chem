@@ -1,8 +1,9 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData} from '@remix-run/react';
 import {Suspense} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
-import {Button, Link} from '@nextui-org/react';
+import {Money} from '@shopify/hydrogen';
+import {Button, Link, Card, Image, CardHeader} from '@nextui-org/react';
+import {HeroBackground} from '~/components/common/HeroBackground';
 
 /**
  * @type {MetaFunction}
@@ -22,11 +23,11 @@ export const meta = ({data}) => {
 export async function loader({context}) {
   const {storefront} = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
-  const featuredCollection = collections.nodes[0];
+  const featuredCollections = collections.nodes ?? [];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const shop = await storefront.query(SHOP_QUERY);
 
-  return defer({featuredCollection, recommendedProducts, shop});
+  return defer({featuredCollections, recommendedProducts, shop});
 }
 
 export default function Homepage() {
@@ -35,7 +36,8 @@ export default function Homepage() {
   return (
     <div>
       <div className="hero">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <HeroBackground />
+        <div className="hero-content grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-1 col-start-1 mx-auto md:mx-10">
             <h1 className="text-4xl font-bold mb-4">
               Tailored Solutions Redefining Industries
@@ -46,12 +48,10 @@ export default function Homepage() {
               Control and Manufacturing Industries.
             </p>
             <p className="mb-4">
-              Cameo Chemicals focuses on custom blending products to meet the
+              Cameo Chemicals offers custom blending products to meet the
               specific needs of our customers, and we are able to supply these
-              products in a variety of quantities and sizes.
-            </p>
-            <p className="mb-4">
-              We also offer a wide selection of standard products.
+              products in a variety of quantities and sizes. We also offer a
+              wide selection of standard products.
             </p>
             <Button
               href="/collections"
@@ -66,8 +66,8 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-      <FeaturedCollection
-        collection={data.featuredCollection}
+      <FeaturedCollections
+        collections={data?.featuredCollections}
         className="mt-4"
       />
       <RecommendedProducts
@@ -83,21 +83,36 @@ export default function Homepage() {
  *   collection: FeaturedCollectionFragment;
  * }}
  */
-function FeaturedCollection({collection}) {
-  if (!collection) return null;
-  const image = collection?.image;
+function FeaturedCollections({collections}) {
+  // const image = collections?.image;
   return (
-    <Link
-      className="featured-collection"
-      to={`/collections/${collection.handle}`}
-    >
-      {image && (
-        <div className="featured-collection-image">
-          <Image data={image} sizes="100vw" />
-        </div>
-      )}
-      <h1>{collection.title}</h1>
-    </Link>
+    <div className="py-16 px-4">
+      <h2 className="text-3xl font-bold mb-10 text-center text-primary">
+        Supported Industries
+      </h2>
+      <div className="gap-6 grid grid-cols-12 grid-rows-2 px-8">
+        {collections.map((item, index) => (
+          <Card
+            key={`featured-collection-${index + 1}`}
+            shadow="sm"
+            isPressable
+            isFooterBlurred
+            className="w-full h-[300px] col-span-4"
+          >
+            <CardHeader className="absolute z-10 top-1 flex-col items-start">
+              <h4 className="text-white font-medium text-2xl">{item.title}</h4>
+            </CardHeader>
+            <Image
+              removeWrapper
+              alt="Card example background"
+              className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
+              src="https://placehold.co/1024x1024/369b92/369b92.png"
+            />
+            {/* <Image data={item?.image} sizes="100vw" /> */}
+          </Card>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -153,6 +168,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
     id
     title
+    description
     image {
       id
       url
@@ -164,7 +180,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   }
   query FeaturedCollection($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 1, sortKey: UPDATED_AT, reverse: true) {
+    collections(first: 8, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...FeaturedCollection
       }

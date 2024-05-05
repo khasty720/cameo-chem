@@ -7,10 +7,42 @@
   padding-bottom: 5rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 11;
+}
+
+.hero-background svg {
+  width: 50rem;
+}
+
+@media (max-width: 768px) {
+  .hero-background svg {
+    height: 35rem;
+    width: 30rem;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 12;
 }
 
 .hero h1 {
   font-size: 3.15rem;
   font-weight: 700;
   line-height: 1.1em;
+}
+
+.hero p {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5em;
 }
