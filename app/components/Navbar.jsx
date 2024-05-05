@@ -132,6 +132,39 @@ export function Navbar({header, cart, isLoggedIn}) {
             </NavbarMenuItem>
           );
         })}
+        <NavbarMenuItem>
+          <Suspense fallback="Sign in">
+            <Await resolve={isLoggedIn} errorElement="Sign in">
+              {(isLoggedIn) => (
+                <>
+                  {isLoggedIn && (
+                    <Link
+                      href="/account"
+                      as={Link}
+                      color="foreground"
+                      className="w-full"
+                      size="md"
+                    >
+                      Account
+                    </Link>
+                  )}
+
+                  {!isLoggedIn && (
+                    <Link
+                      href="/account/login"
+                      as={Link}
+                      color="foreground"
+                      className="w-full"
+                      size="md"
+                    >
+                      Sign In
+                    </Link>
+                  )}
+                </>
+              )}
+            </Await>
+          </Suspense>
+        </NavbarMenuItem>
       </NavbarMenu>
     </NextUINavbar>
   );

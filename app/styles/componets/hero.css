@@ -24,9 +24,8 @@
 }
 
 @media (max-width: 768px) {
-  .hero-background svg {
-    height: 35rem;
-    width: 30rem;
+  .hero-background {
+    display: none;
   }
 }
 

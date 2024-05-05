@@ -1,5 +1,5 @@
 import {defer} from '@shopify/remix-oxygen';
-import {Await, useLoaderData} from '@remix-run/react';
+import {Await, useLoaderData, useNavigate} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Money} from '@shopify/hydrogen';
 import {Button, Link, Card, Image, CardHeader} from '@nextui-org/react';
@@ -59,9 +59,9 @@ export default function Homepage() {
               size="large"
               radius="sm"
               variant="solid"
-              className="bg-white text-primary font-bold"
+              className="bg-white text-primary font-bold mt-2"
             >
-              Shop Now
+              Explore Solutions
             </Button>
           </div>
         </div>
@@ -84,31 +84,34 @@ export default function Homepage() {
  * }}
  */
 function FeaturedCollections({collections}) {
-  // const image = collections?.image;
+  let navigate = useNavigate();
+
   return (
     <div className="py-16 px-4">
       <h2 className="text-3xl font-bold mb-10 text-center text-primary">
-        Supported Industries
+        Industry Solutions
       </h2>
-      <div className="gap-6 grid grid-cols-12 grid-rows-2 px-8">
+      <div className="gap-6 grid grid-cols-12 grid-rows-2 md:px-20 px-8">
         {collections.map((item, index) => (
           <Card
             key={`featured-collection-${index + 1}`}
             shadow="sm"
+            onPress={() => navigate(`/collections/${item.handle}`)}
             isPressable
             isFooterBlurred
-            className="w-full h-[300px] col-span-4"
+            className="w-full h-[300px] md:col-span-4 sm:col-span-6 col-span-12"
           >
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
               <h4 className="text-white font-medium text-2xl">{item.title}</h4>
             </CardHeader>
             <Image
               removeWrapper
-              alt="Card example background"
+              alt={item?.image?.altText ?? item?.title}
               className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
               src="https://placehold.co/1024x1024/369b92/369b92.png"
+              // TODO Use the actual image from the collection *
+              // src={item?.image?.url}
             />
-            {/* <Image data={item?.image} sizes="100vw" /> */}
           </Card>
         ))}
       </div>
@@ -133,7 +136,7 @@ function RecommendedProducts({products}) {
                 <Link
                   key={product.id}
                   className="recommended-product"
-                  to={`/products/${product.handle}`}
+                  href={`/products/${product.handle}`}
                 >
                   <Image
                     data={product.images.nodes[0]}
