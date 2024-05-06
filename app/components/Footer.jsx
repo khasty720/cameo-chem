@@ -27,24 +27,24 @@ function FooterLinks({menu, primaryDomainUrl}) {
   return (
     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 px-4 mb-6">
       <div className="col-span-1">
-        <span className="block capitalize text-white text-sm font-semibold mb-2">
+        <span className="block capitalize text-white text-md font-semibold mb-2">
           General
         </span>
         <ul className="list-unstyled">
           <li>
             <Link
               color="secondary"
-              className="block pb-2 text-sm"
+              className="block pb-2 text-md"
               href="/collections"
               scroll={false}
             >
-              Catalog
+              Industries
             </Link>
           </li>
           <li>
             <Link
               color="secondary"
-              className="block pb-2 text-sm"
+              className="block pb-2 text-md"
               href="/pages/about"
               scroll={false}
             >
@@ -54,7 +54,7 @@ function FooterLinks({menu, primaryDomainUrl}) {
           <li>
             <Link
               color="secondary"
-              className="block pb-2 text-sm"
+              className="block pb-2 text-md"
               href="/pages/contact"
               scroll={false}
             >
@@ -64,7 +64,7 @@ function FooterLinks({menu, primaryDomainUrl}) {
         </ul>
       </div>
       <div className="col-span-1">
-        <span className="block capitalize text-white text-sm font-semibold mb-2">
+        <span className="block capitalize text-white text-md font-semibold mb-2">
           Legal
         </span>
         <ul className="list-unstyled">
@@ -82,7 +82,7 @@ function FooterLinks({menu, primaryDomainUrl}) {
               <li key={item.id}>
                 <Link
                   color="secondary"
-                  className="block pb-2 text-sm"
+                  className="block pb-2 text-md"
                   href={url}
                   scroll={false}
                 >
