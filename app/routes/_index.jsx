@@ -2,7 +2,15 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, useNavigate} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Money} from '@shopify/hydrogen';
-import {Button, Link, Card, Image, CardHeader} from '@nextui-org/react';
+import {
+  Button,
+  Link,
+  Image,
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+} from '@nextui-org/react';
 import {HeroBackground} from '~/components/common/HeroBackground';
 
 /**
@@ -43,15 +51,14 @@ export default function Homepage() {
               Tailored Solutions Redefining Industries
             </h1>
             <p className="mb-4">
-              We are an industrial chemical company that focuses on the Car
-              Wash, Truck Wash, Ready Mix Concrete, Asphalt, Floor Care, Odor
-              Control and Manufacturing Industries.
+              Cameo Chemicals is an industrial chemical company that focuses on
+              Car Wash, Truck Wash, Ready Mix Concrete, Asphalt, Floor Care,
+              Odor Control and Manufacturing Industries.
             </p>
             <p className="mb-4">
-              Cameo Chemicals offers custom blending products to meet the
-              specific needs of our customers, and we are able to supply these
-              products in a variety of quantities and sizes. We also offer a
-              wide selection of standard products.
+              We offer a wide selection of standard and custom blended products
+              & solutions. We are able to supply our solutions in a variety of
+              quantities and sizes to meet your specific needs.
             </p>
             <Button
               href="/collections"
@@ -89,7 +96,7 @@ function FeaturedCollections({collections}) {
   return (
     <div className="py-16 px-4">
       <h2 className="text-3xl font-bold mb-10 text-center text-primary">
-        Industry Solutions
+        Our Industries & Solutions
       </h2>
       <div className="gap-6 grid grid-cols-12 grid-rows-2 md:px-20 px-8">
         {collections.map((item, index) => (
@@ -106,7 +113,7 @@ function FeaturedCollections({collections}) {
             </CardHeader>
             <Image
               removeWrapper
-              alt={item?.image?.altText ?? item?.title}
+              alt={item?.title}
               className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
               src="https://placehold.co/1024x1024/369b92/369b92.png"
               // TODO Use the actual image from the collection *
@@ -125,35 +132,48 @@ function FeaturedCollections({collections}) {
  * }}
  */
 function RecommendedProducts({products}) {
+  let navigate = useNavigate();
+
   return (
-    <div className="recommended-products">
-      <h2>Recommended Products</h2>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={products}>
-          {({products}) => (
-            <div className="recommended-products-grid">
-              {products.nodes.map((product) => (
-                <Link
-                  key={product.id}
-                  className="recommended-product"
-                  href={`/products/${product.handle}`}
-                >
-                  <Image
-                    data={product.images.nodes[0]}
-                    aspectRatio="1/1"
-                    sizes="(min-width: 45em) 20vw, 50vw"
-                  />
-                  <h4>{product.title}</h4>
-                  <small>
-                    <Money data={product.priceRange.minVariantPrice} />
-                  </small>
-                </Link>
-              ))}
-            </div>
-          )}
-        </Await>
-      </Suspense>
-      <br />
+    <div className="py-16 px-4">
+      <h2 className="text-3xl font-bold mb-10 text-center text-primary">
+        Recommended Products
+      </h2>
+      <div className="gap-1 grid grid-cols-12 grid-rows-1 md:px-20 px-8">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Await resolve={products}>
+            {({products}) => (
+              <>
+                {new Array(12)
+                  .fill(products.nodes[0])
+
+                  .map((product, index) => (
+                    <Card
+                      key={`featured-product-${index + 1}`}
+                      shadow="sm"
+                      onPress={() => navigate(`/products/${product.handle}`)}
+                      isPressable
+                      isFooterBlurred
+                      className="h-[250px] col-span-2 mx-2"
+                    >
+                      <CardBody className="overflow-visible p-0">
+                        <Image
+                          data={product.images.nodes[0]}
+                          aspectRatio="1/1"
+                          sizes="(min-width: 45em) 20vw, 50vw"
+                        />
+                      </CardBody>
+                      <CardFooter className="text-small justify-between">
+                        <b>{product.title}</b>
+                        <Money data={product.priceRange.minVariantPrice} />
+                      </CardFooter>
+                    </Card>
+                  ))}
+              </>
+            )}
+          </Await>
+        </Suspense>
+      </div>
     </div>
   );
 }
