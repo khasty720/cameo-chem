@@ -136,44 +136,49 @@ function RecommendedProducts({products}) {
 
   return (
     <div className="py-16 px-4">
-      <h2 className="text-3xl font-bold mb-10 text-center text-primary">
+      <h2 className="text-3xl font-bold mb-8 text-center text-primary">
         Recommended Products
       </h2>
-      <div className="gap-1 grid grid-cols-12 grid-rows-1 md:px-20 px-8">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Await resolve={products}>
-            {({products}) => (
-              <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Await resolve={products}>
+          {({products}) => (
+            <div className="md:px-20 px-8 w-full overflow-x-auto">
+              <div className="flex whitespace-nowrap">
+                {/* TODO Use the actual products from the query */}
                 {new Array(12)
                   .fill(products.nodes[0])
 
                   .map((product, index) => (
-                    <Card
+                    <div
+                      className="inline-block"
                       key={`featured-product-${index + 1}`}
-                      shadow="sm"
-                      onPress={() => navigate(`/products/${product.handle}`)}
-                      isPressable
-                      isFooterBlurred
-                      className="h-[250px] col-span-2 mx-2"
                     >
-                      <CardBody className="overflow-visible p-0">
-                        <Image
-                          data={product.images.nodes[0]}
-                          aspectRatio="1/1"
-                          sizes="(min-width: 45em) 20vw, 50vw"
-                        />
-                      </CardBody>
-                      <CardFooter className="text-small justify-between">
-                        <b>{product.title}</b>
-                        <Money data={product.priceRange.minVariantPrice} />
-                      </CardFooter>
-                    </Card>
+                      <Card
+                        shadow="sm"
+                        onPress={() => navigate(`/products/${product.handle}`)}
+                        isPressable
+                        isFooterBlurred
+                        className="mx-4 my-4 h-[250px] w-[250px]"
+                      >
+                        <CardBody className="overflow-visible p-0">
+                          <Image
+                            data={product.images.nodes[0]}
+                            aspectRatio="1/1"
+                            sizes="(min-width: 45em) 20vw, 50vw"
+                          />
+                        </CardBody>
+                        <CardFooter className="text-small justify-between">
+                          <b>{product.title}</b>
+                          <Money data={product.priceRange.minVariantPrice} />
+                        </CardFooter>
+                      </Card>
+                    </div>
                   ))}
-              </>
-            )}
-          </Await>
-        </Suspense>
-      </div>
+              </div>
+            </div>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 }
