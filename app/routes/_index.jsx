@@ -100,26 +100,28 @@ function FeaturedCollections({collections}) {
       </h2>
       <div className="gap-6 grid grid-cols-12 grid-rows-2 md:px-20 px-8">
         {collections.map((item, index) => (
-          <Card
-            key={`featured-collection-${index + 1}`}
-            shadow="sm"
-            onPress={() => navigate(`/collections/${item.handle}`)}
-            isPressable
-            isFooterBlurred
-            className="w-full h-[300px] md:col-span-4 sm:col-span-6 col-span-12"
-          >
-            <CardHeader className="absolute z-10 top-1 flex-col items-start">
-              <h4 className="text-white font-medium text-2xl">{item.title}</h4>
-            </CardHeader>
-            <Image
-              removeWrapper
-              alt={item?.title}
-              className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-              src="https://placehold.co/1024x1024/369b92/369b92.png"
-              // TODO Use the actual image from the collection *
-              // src={item?.image?.url}
-            />
-          </Card>
+          <>
+            <Card
+              key={`featured-collection-${index + 1}`}
+              shadow="sm"
+              onPress={() => navigate(`/collections/${item.handle}`)}
+              isPressable
+              isFooterBlurred
+              className="w-full h-[300px] md:col-span-4 sm:col-span-6 col-span-12"
+            >
+              <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                <h4 className="text-white font-medium text-2xl">
+                  {item.title}
+                </h4>
+              </CardHeader>
+              <Image
+                removeWrapper
+                alt={item?.title}
+                className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
+                src={item?.image?.url}
+              />
+            </Card>
+          </>
         ))}
       </div>
     </div>
@@ -162,12 +164,13 @@ function RecommendedProducts({products}) {
                       >
                         <CardBody className="overflow-visible p-0">
                           <Image
-                            data={product.images.nodes[0]}
-                            aspectRatio="1/1"
-                            sizes="(min-width: 45em) 20vw, 50vw"
+                            src={product.images.nodes?.[0]?.url}
+                            removeWrapper
+                            alt={product?.title}
+                            className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
                           />
                         </CardBody>
-                        <CardFooter className="text-small justify-between">
+                        <CardFooter className="text-small justify-between text-white absolute z-10 bottom-0 flex-col items-start">
                           <b>{product.title}</b>
                           <Money data={product.priceRange.minVariantPrice} />
                         </CardFooter>
