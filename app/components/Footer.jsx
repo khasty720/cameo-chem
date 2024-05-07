@@ -68,7 +68,7 @@ function FooterLinks({menu, primaryDomainUrl}) {
           Legal
         </span>
         <ul className="list-unstyled">
-          {menuItems.map((item) => {
+          {menuItems.map((item, index) => {
             if (!item.url) return null;
 
             const url =
@@ -79,7 +79,7 @@ function FooterLinks({menu, primaryDomainUrl}) {
                 : item.url;
 
             return (
-              <li key={item.id}>
+              <li key={`footer-link-${index + 1}`}>
                 <Link
                   color="secondary"
                   className="block pb-2 text-md"
