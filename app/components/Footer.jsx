@@ -1,4 +1,4 @@
-import {Link} from '@nextui-org/react';
+import {Link, Input, Button} from '@nextui-org/react';
 import {useRootLoaderData} from '~/root';
 
 export function Footer({menu, shop}) {
@@ -6,6 +6,9 @@ export function Footer({menu, shop}) {
     <footer className="relative bg-primary pt-10 lg:pt-24 pb-6">
       <div className="flex flex-col mx-auto max-w-6xl justify-center">
         <div className="grid gap-4 grid-cols-2">
+          <div className="col-span-2 md:col-span-1">
+            <FooterNewsletter />
+          </div>
           <div className="col-span-2 md:col-span-1">
             <FooterLinks
               menu={menu}
@@ -17,6 +20,43 @@ export function Footer({menu, shop}) {
         <FooterFinisher />
       </div>
     </footer>
+  );
+}
+
+function FooterNewsletter() {
+  return (
+    <div className="flex flex-wrap items-top mb-6">
+      <div className="w-full xl:w-10/12 px-4">
+        <span className="block capitalize text-white text-md font-semibold mb-2">
+          Newsletter
+        </span>
+        <p className="pb-3 text-sm text-white">
+          Sign up for our newsletter to get the latest news, updates and offers.
+        </p>
+        <FooterNewsletterForm />
+      </div>
+    </div>
+  );
+}
+
+function FooterNewsletterForm() {
+  return (
+    <div className="mx-0 flex flex-wrap items-center">
+      <div className="w-8/12 md:w-10/12">
+        <Input
+          type="email"
+          name="email"
+          placeholder="Subscribe via email"
+          className="mt-3"
+          radius="sm"
+        ></Input>
+      </div>
+      <div className="w-4/12 md:w-2/12">
+        <Button color="secondary" className="mt-3 ml-2" radius="sm">
+          Subscribe
+        </Button>
+      </div>
+    </div>
   );
 }
 
@@ -91,6 +131,43 @@ function FooterLinks({menu, primaryDomainUrl}) {
               </li>
             );
           })}
+        </ul>
+      </div>
+      <div className="col-span-1">
+        <span className="block capitalize text-white text-md font-semibold mb-2">
+          Other Resources
+        </span>
+        <ul className="list-unstyled">
+          <li>
+            <Link
+              color="secondary"
+              className="block pb-2 text-md"
+              href="/pages/distributors"
+              scroll={false}
+            >
+              Distributors
+            </Link>
+          </li>
+          <li>
+            <Link
+              color="secondary"
+              className="block pb-2 text-md"
+              href="/pages/suppliers"
+              scroll={false}
+            >
+              Suppliers
+            </Link>
+          </li>
+          <li>
+            <Link
+              color="secondary"
+              className="block pb-2 text-md"
+              href="/pages/Science"
+              scroll={false}
+            >
+              Our Science
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

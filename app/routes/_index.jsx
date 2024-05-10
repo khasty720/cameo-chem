@@ -137,7 +137,7 @@ function RecommendedProducts({products}) {
   let navigate = useNavigate();
 
   return (
-    <div className="py-16 px-4">
+    <div className="py-16 px-4 bg-gray-200">
       <h2 className="text-3xl font-bold mb-8 text-center text-primary">
         Recommended Products
       </h2>
@@ -156,7 +156,7 @@ function RecommendedProducts({products}) {
                       key={`featured-product-${index + 1}`}
                     >
                       <Card
-                        shadow="sm"
+                        shadow="md"
                         onPress={() => navigate(`/products/${product.handle}`)}
                         isPressable
                         isFooterBlurred
